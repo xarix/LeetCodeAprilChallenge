@@ -8,13 +8,25 @@ namespace LeetCodeAprilChallenge
     {
         public int MaxProfit(int[] prices)
         {
-            for (int i = 0; i < prices.Length; i++)
+            var profit = 0;
+            var buyPrice = 0;
+            for (int i = 0; i < prices.Length - 1; i++)
             {
-                if ( )
+                if ( buyPrice == 0 && prices[i] < prices[i + 1])
                 {
-
+                    buyPrice = prices[i];
+                }
+                else if (buyPrice != 0 && prices[i] > prices[i+1])
+                {
+                    profit += prices[i] - buyPrice;
+                    buyPrice = 0;
                 }
             }
+            if (buyPrice != 0)
+            {
+                profit += prices[prices.Length - 1] - buyPrice;
+            }
+            return profit;
         }
     }
 }
